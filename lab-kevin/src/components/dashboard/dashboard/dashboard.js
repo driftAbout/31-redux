@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import {CategoryForm} from '../../category/index.js';
+import {CategoryForm, CategoryItem} from '../../category/index.js';
 import {category_create} from '../../../actions/category-actions.js'
 import {DashNav} from '../index.js';
 import {connect} from 'react-redux';

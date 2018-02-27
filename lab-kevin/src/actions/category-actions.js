@@ -6,21 +6,21 @@ const category_create = category => {
 
   return {
     type: 'CATEGORY_CREATE',
-    category: category,
+    payload: category,
   }
 };
 
 const category_update = category => {
   return {
     type: 'CATEGORY_UPDATE',
-    category: category,
+    payload: category,
   }
 };
 
 const category_delete = category => {
   return {
     type: 'CATEGORY_DELETE',
-    category: category,
+    payload: category,
   }
 }
 
