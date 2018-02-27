@@ -10,20 +10,23 @@ class Dashboard extends React.Component{
     return (
     <section>
       <h2>Wealth is the ability to fully experience life. <span>--Henry David Thoreau</span></h2>
-      <DashNav path={this.props.match.path}/>
-      <Route path={`${this.props.match.path}/category-create`} render={() => {
+      {/*<DashNav path={this.props.match.path}/>*/}
+      <DashNav path=""/>
+      {/*<Route path={`${this.props.match.path}/category-create`} render={() => {*/}
+        <Route path='/category-create' render={() => {
         return (
           <section className="category-create">
             <CategoryForm submit_text="Procreate" onComplete={this.props.dashboard_category_create}/>
           </section>
         );
       }} />
-      <Route path={`${this.props.match.path}/category-view`} render={() => {
+      {/*<Route path={`${this.props.match.path}/category-view`} render={() => {*/}
+        <Route path='/category-view' render={() => {
         return (
         <ul className="category-list">
-          {this.props.categories ? map.this.props.categories(category => {
+          {this.props.categories.length ? this.props.categories.map(category => 
             <CategoryItem key={category.id} category={category}/>
-          }): undefined}
+          ): undefined}
         </ul>
         );
       }} />

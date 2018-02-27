@@ -3,6 +3,7 @@ import uuid from 'uuid/v4';
 const category_create = category => {
   category.id = uuid();
   category.timeStamp = new Date();
+  category.editing = false;
 
   return {
     type: 'CATEGORY_CREATE',
@@ -17,10 +18,10 @@ const category_update = category => {
   }
 };
 
-const category_delete = category => {
+const category_delete = id => {
   return {
     type: 'CATEGORY_DELETE',
-    payload: category,
+    payload: id,
   }
 }
 

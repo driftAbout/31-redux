@@ -20,6 +20,7 @@ class CategoryForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault()
+    if(!this.state.name && !this.state.budget) return;
     this.props.onComplete(this.state)
     this.setState({name: '', budget: 0});
   }
