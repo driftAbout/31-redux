@@ -14,7 +14,7 @@ class App extends React.Component{
         <Header/>
         <main>
           <Provider store={store}>
-            <Route path='/dashboard' component={Dashboard} />
+            <Route path='/' component={Dashboard} />
           </Provider>
         </main> 
         <Footer/> 
