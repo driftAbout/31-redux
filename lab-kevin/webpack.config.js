@@ -1,20 +1,31 @@
 'use strict';
 
 require('dotenv').config({path: `${__dirname}/.dev.env`})
-let production = process.env.NODE_ENV = 'production'
+let production = process.env.NODE_ENV === 'production'
 
 const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
-const {DefinePluginPLugin, Envirnment} = require('webpack');
+const {DefinePlugin, EnvironmentPlugin} = require('webpack');
 
 let plugins = [
   new HtmlPlugin({template: `${__dirname}/src/index.html`}),
   new ExtractTextPlugin('bundle-[hash].css'),
+  new DefinePlugin({__DEBUG__: JSON.stringify(!production)}),
+  new EnvironmentPlugin(['NODE_ENV']),
 ],
 
+if(production){
+  plugins = plugins.concat([
+    new CleanPlugin(),
+    new UglifyPlugin(),
+  ])
+}
+
 module.exports = {
+  devtool: production ? undefined : 'eval-source-map',
+  devDerver: {historyApiFallback: true},
   entry: `${__dirname}/src/main.js`,
   output: {
     path: `${__dirname}/build`,
@@ -35,15 +46,38 @@ module.exports = {
       },
       {
         test: /\.(jpg|jpeg|gif|png|tif|tiff)$/,
-        loaders: ,
+        use: [
+          {
+          loader: 'url-loader',
+          options: {
+            limit: 6000,
+            name: 'images/[name].[ext]',
+          }
+        },
+      ],
       },
       {
-        test: /\.(ttf)$/,
-        loaders: ,
+        test: /\.(ttf|eot|woff|woff2|svg|glyph)$/,
+        use: [
+          {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'font/[name].[ext]',
+          },
+        },
+      ],
       },
       {
-        test: /\.(mp3|wav)$/,
-        loaders: ,
+        test: /\.(mp3|mp4|wav)$/,
+        use: [
+          {
+          loader: 'file-loader',
+          options: {
+            name: 'audio/[name].[ext]',
+          },
+        },
+      ],
       },
     ],
   },
