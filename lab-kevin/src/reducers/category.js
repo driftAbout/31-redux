@@ -10,9 +10,9 @@ takeAction['CATEGORY_DELETE'] = () => [];
 
 
 
-const category = (state=[], action) => {
+const category_reducer = (state=[], action) => {
   let {type, category} = action;
   takeAction[type] ? takeAction[type]() : state;
 }
 
-export default category;
+export {category_reducer};

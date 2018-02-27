@@ -1,7 +1,7 @@
 'use strict';
 
-require('dotenv').config({path: `${__dirname}/.dev.env`})
-let production = process.env.NODE_ENV === 'production'
+require('dotenv').config({path: `${__dirname}/.dev.env`});
+let production = process.env.NODE_ENV === 'production';
 
 const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -14,18 +14,18 @@ let plugins = [
   new ExtractTextPlugin('bundle-[hash].css'),
   new DefinePlugin({__DEBUG__: JSON.stringify(!production)}),
   new EnvironmentPlugin(['NODE_ENV']),
-],
+];
 
-if(production){
+if (production){
   plugins = plugins.concat([
     new CleanPlugin(),
     new UglifyPlugin(),
-  ])
+  ]);
 }
 
 module.exports = {
   devtool: production ? undefined : 'eval-source-map',
-  devDerver: {historyApiFallback: true},
+  devServer: {historyApiFallback: true},
   entry: `${__dirname}/src/main.js`,
   output: {
     path: `${__dirname}/build`,

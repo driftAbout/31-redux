@@ -1,6 +1,6 @@
 import {createStore} from 'redux';
-import {Reducer} from '../reducers/category.js';
+import {category_reducer} from '../reducers/category.js';
 
-const store = () => createStore(Reducer);
+let  store = createStore(category_reducer);
 
 export default store;

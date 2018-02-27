@@ -7,7 +7,7 @@ class Nav extends React.Component{
       <nav>
         <ul className="nav-list">
           <li className="nav-list-item">
-            <Link to="/">Home</Link>
+            <Link to="/dashboard">Home</Link>
           </li>
         </ul>
       </nav>
